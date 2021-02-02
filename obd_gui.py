@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ###########################################################################
 # obd_gui.py
 #
@@ -9,6 +9,7 @@
 
 import os
 import wx
+import wx.adv
 import time
 from threading import Thread
 
@@ -31,7 +32,7 @@ class OBDConnection(object):
     """
     Class for OBD connection. Use a thread for connection.
     """
-    
+
     def __init__(self):
         self.c = OBD_Capture()
 
@@ -62,7 +63,7 @@ class OBDConnection(object):
                 except:
                     pass
         return None
-    
+
     def get_sensors(self):
         sensors = []
         if self.c:
@@ -84,7 +85,7 @@ class OBDText(wx.TextCtrl):
         wx.TextCtrl.__init__(self, parent, style=style)
 
         self.SetBackgroundColour('#21211f')
-        self.SetForegroundColour(wx.WHITE)  
+        self.SetForegroundColour(wx.WHITE)
 
         font = wx.Font(12, wx.ROMAN, wx.NORMAL, wx.NORMAL, faceName="Monaco")
         self.SetFont(font)
@@ -105,11 +106,11 @@ class OBDStaticBox(wx.StaticBox):
         """
         wx.StaticBox.__init__(self, *args, **kwargs)
 
-    def OnPaint(self, event): 
-        self.Paint(wx.PaintDC(self)) 
+    def OnPaint(self, event):
+        self.Paint(wx.PaintDC(self))
 
-    def Paint(self, dc): 
-        dc.DrawBitmap(self.bitmap, 0, 0)     
+    def Paint(self, dc):
+        dc.DrawBitmap(self.bitmap, 0, 0)
 
 #-------------------------------------------------------------------------------
 
@@ -117,7 +118,7 @@ class OBDPanelGauges(wx.Panel):
     """
     Panel for gauges.
     """
-    
+
     def __init__(self, *args, **kwargs):
         """
         Constructor.
@@ -148,15 +149,15 @@ class OBDPanelGauges(wx.Panel):
         # Handle events for mouse clicks
         self.Bind(wx.EVT_LEFT_DOWN, self.onLeft)
         self.Bind(wx.EVT_RIGHT_DOWN, self.onRight)
-        
+
         # Connection
         self.connection = None
 
-        # Sensors 
+        # Sensors
         self.istart = 0
         self.sensors = []
-        
-        # Port 
+
+        # Port
         self.port = None
 
         # List to hold children widgets
@@ -166,10 +167,10 @@ class OBDPanelGauges(wx.Panel):
 
     def setConnection(self, connection):
         self.connection = connection
-    
+
     def setSensors(self, sensors):
         self.sensors = sensors
-        
+
     def setPort(self, port):
         self.port = port
 
@@ -481,21 +482,21 @@ class OBDFrame0(wx.Frame):
         """
         wx.Frame.__init__(self, None, wx.ID_ANY, "")
 
-        image = wx.Image(BACKGROUND_FILENAME) 
-        width, height = wx.GetDisplaySize() 
+        image = wx.Image(BACKGROUND_FILENAME)
+        width, height = wx.GetDisplaySize()
         image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
-        self.bitmap = wx.BitmapFromImage(image) 
+        self.bitmap = wx.BitmapFromImage(image)
         self.Bind(wx.EVT_PAINT, self.OnPaint)
 
-    def OnPaint(self, event): 
-        self.Paint(wx.PaintDC(self)) 
+    def OnPaint(self, event):
+        self.Paint(wx.PaintDC(self))
 
-    def Paint(self, dc): 
-        dc.DrawBitmap(self.bitmap, 0, 0)     
+    def Paint(self, dc):
+        dc.DrawBitmap(self.bitmap, 0, 0)
 
 #-------------------------------------------------------------------------------
 
-class OBDSplashScreen(wx.SplashScreen):
+class OBDSplashScreen(wx.adv.SplashScreen):
     """
     Splash screen.
     """
@@ -507,10 +508,10 @@ class OBDSplashScreen(wx.SplashScreen):
         self.frame0 = frame0
 
         image = wx.Image(SPLASHSCREEN_FILENAME)
-        width, height = wx.GetDisplaySize() 
+        width, height = wx.GetDisplaySize()
         image = image.Scale(width, height, wx.IMAGE_QUALITY_HIGH)
-        bitmap = wx.BitmapFromImage(image) 
-        
+        bitmap = wx.BitmapFromImage(image)
+
         splashStyle = wx.SPLASH_CENTRE_ON_SCREEN | wx.SPLASH_TIMEOUT
         splashDuration = SPLASHSCREEN_TIMEOUT
         wx.SplashScreen.__init__(self, bitmap, splashStyle, splashDuration, parent)

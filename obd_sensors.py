@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ###########################################################################
 # obd_sensors.py
 #
@@ -171,13 +171,12 @@ SENSORS = [
     Sensor("engine_time"           , "Engine Start MIN"				, "011F" , sec_to_min       ,"min"    ),
     Sensor("engine_mil_time"       , "Engine Run MIL"				, "014D" , sec_to_min       ,"min"    ),
     ]
-     
-    
+
 #___________________________________________________________
 
 def test():
     for i in SENSORS:
-        print i.name, i.value("F")
+        print( i.name, i.value("F") )
 
 if __name__ == "__main__":
     test()

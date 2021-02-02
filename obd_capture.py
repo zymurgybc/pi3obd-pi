@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import obd_io
 import serial
@@ -17,7 +17,7 @@ class OBD_Capture():
 
     def connect(self):
         portnames = scanSerial()
-        print portnames
+        print( portnames )
         for port in portnames:
             self.port = obd_io.OBDPort(port, None, 2, 2)
             if(self.port.State == 0):
@@ -27,19 +27,19 @@ class OBD_Capture():
                 break
 
         if(self.port):
-            print "Connected to "+self.port.port.name
-            
+            print( "Connected to "+self.port.port.name )
+
     def is_connected(self):
         return self.port
-        
+
     def getSupportedSensorList(self):
-        return self.supportedSensorList 
+        return self.supportedSensorList
 
     def capture_data(self):
 
         text = ""
         #Find supported sensors - by getting PIDs from OBD
-        # its a string of binary 01010101010101 
+        # its a string of binary 01010101010101
         # 1 means the sensor is supported
         self.supp = self.port.sensor(0)[1]
         self.supportedSensorList = []
@@ -52,16 +52,16 @@ class OBD_Capture():
                 self.supportedSensorList.append([i+1, obd_sensors.SENSORS[i+1]])
             else:
                 self.unsupportedSensorList.append([i+1, obd_sensors.SENSORS[i+1]])
-        
+
         for supportedSensor in self.supportedSensorList:
             text += "supported sensor index = " + str(supportedSensor[0]) + " " + str(supportedSensor[1].shortname) + "\n"
-        
+
         time.sleep(3)
-        
+
         if(self.port is None):
             return None
 
-        #Loop until Ctrl C is pressed        
+        #Loop until Ctrl C is pressed
         localtime = datetime.now()
         current_time = str(localtime.hour)+":"+str(localtime.minute)+":"+str(localtime.second)+"."+str(localtime.microsecond)
         #log_string = current_time + "\n"
@@ -80,6 +80,6 @@ if __name__ == "__main__":
     o.connect()
     time.sleep(3)
     if not o.is_connected():
-        print "Not connected"
+        print( "Not connected" )
     else:
         o.capture_data()
