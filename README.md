@@ -1,5 +1,5 @@
-pyobd
-=====
+py3obd-pi
+=========
 
 <pre>OBD-Pi: Raspberry Pi Displaying Car Diagnostics (OBD-II) Data On An Aftermarket Head Unit
 
@@ -19,12 +19,15 @@ OBD stands for On-Board Diagnostics, and this standard connector has been mandat
 
 Vehicles that comply with the OBD-II standards will have a data connector within about 2 feet of the steering wheel. The OBD connector is officially called a SAE J1962 Diagnostic Connector, but is also known by DLC, OBD Port, or OBD connector. It has positions for 16 pins.
 
-pyOBD?
-pyOBD (aka pyOBD-II or pyOBD2) is an open source OBD-II (SAE-J1979) compliant scantool software written entirely in Python. It is designed to interface with low-cost ELM 32x OBD-II diagnostic interfaces such as ELM-USB. It will basically allow you to talk to your car's ECU, display fault codes, display measured values, read status tests, etc.
+py3OBD?
+py3OBD (aka pyOBD-II or pyOBD2) is an open source OBD-II (SAE-J1979) compliant scantool software written entirely in Python (version 3 syntax). It is designed to interface with low-cost ELM 32x OBD-II diagnostic interfaces such as ELM-USB. It will basically allow you to talk to your car's ECU, display fault codes, display measured values, read status tests, etc.
 
-I took a fork of pyOBD’s software from their GitHub repository, https://github.com/peterh/pyobd, and used this as the basis for my program.
+I took a fork of pyOBD’s software from their GitHub repository, https://github.com/PBartek/pyobd, and used this as the basis for my program.
+
+PBartek took a fork of pyOBD’s software from their GitHub repository, https://github.com/peterh/pyobd, and used this as the basis for their program.
 
 The program will connect through the OBD-II interface, display the gauges available dependent on the particular vehicle and display realtime engine data to the cars aftermarket head unit in an interactive GUI.
+
 Software Installation
 Before you start you will need a working install of Raspbian with network access.
 
@@ -40,16 +43,16 @@ Before proceeding, run:
 
 Install these components using the command:
 #  sudo apt-get install python-serial
-#  sudo apt-get install bluetooth bluez-utils blueman
-#  sudo apt-get install python-wxgtk2.8 python-wxtools wx2.8-i18n libwxgtk2.8-dev
+#  sudo apt-get install bluetooth blueman
+#  sudo apt-get install python3-wxgtk4.0
 #  sudo apt-get install git-core
 #  sudo reboot 
 
-Next, download the OBD-Pi Software direct from GitHub (https://github.com/Pbartek/pyobd-pi.git)
+Next, download the OBD-Pi Software direct from GitHub (https://github.com/zymurgybc/py3obd-pi.git)
 
 Or using the command:
 #  cd ~
-#  git clone https://github.com/Pbartek/pyobd-pi.git
+#  git clone https://github.com/zymurgybc/py3obd-pi.git
 
 Vehicle Installation
 The vehicle installation is quite simple.
@@ -72,9 +75,9 @@ The vehicle installation is quite simple.
 Note: Click the Bluetooth icon, bottom right (Desktop) to configure your device. Right click on your Bluetooth device to bring up Connect To: SPP Dev.
 
 8. Open up Terminal and run:
-#  cd pyobd-pi
+#  cd py3obd-pi
 #  sudo su
-#  python obd_gui.py
+#  python3 obd_gui.py
 
 Use the Left and Right arrow key to cycle through the gauge display.
 Note: Left and Right mouse click will also work
@@ -83,10 +86,10 @@ To exit the program just press Control and C or Alt and Esc.
 Update: 
 Data Logging
 If you would like to log your data run:
-#  cd pyobd-pi
-#  python obd_recorder.py
+#  cd py3obd-pi
+#  python3 obd_recorder.py
 
 The logged data file will be saved under: 
-/home/username/pyobd-pi/log/
+/home/pi/py3obd-pi/log/
 
 Enjoy and drive safe!</pre>
